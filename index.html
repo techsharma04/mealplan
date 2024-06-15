@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Plan Creator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1,
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .meal {
+            margin-bottom: 20px;
+        }
+
+        .meal h3 {
+            background: #f7f7f7;
+            padding: 10px;
+            border-left: 5px solid #ff6f61;
+            color: #555;
+        }
+
+        .meal ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .meal ul li {
+            background: #f9f9f9;
+            margin: 5px 0;
+            padding: 10px;
+            border-left: 3px solid #ff6f61;
+        }
+
+        .meal ul li span {
+            float: right;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background: #f7f7f7;
+            margin-top: 20px;
+            color: #555;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .form-group button {
+            background-color: #ff6f61;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .form-group button:hover {
+            background-color: #e55c50;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Meal Plan Creator</h1>
+
+        <form id="mealForm">
+            <div class="form-group">
+                <label for="day">Day</label>
+                <input type="text" id="day" placeholder="Enter Day (e.g., Day 1)">
+            </div>
+            <div class="form-group">
+                <label for="breakfast">Breakfast</label>
+                <textarea id="breakfast" rows="3" placeholder="Enter breakfast details"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="midMorningSnack">Mid-Morning Snack</label>
+                <textarea id="midMorningSnack" rows="3" placeholder="Enter mid-morning snack details"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="lunch">Lunch</label>
+                <textarea id="lunch" rows="3" placeholder="Enter lunch details"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="afternoonSnack">Afternoon Snack</label>
+                <textarea id="afternoonSnack" rows="3" placeholder="Enter afternoon snack details"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="dinner">Dinner</label>
+                <textarea id="dinner" rows="3" placeholder="Enter dinner details"></textarea>
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="saveMealPlan()">Save</button>
+            </div>
+        </form>
+
+        <div id="mealPlanDisplay" class="meal-plan-display"></div>
+
+        <div class="footer">
+            <p>&copy; 2024 Meal Plan Creator</p>
+        </div>
+    </div>
+
+    <script>
+        function saveMealPlan() {
+            const day = document.getElementById('day').value;
+            const breakfast = document.getElementById('breakfast').value;
+            const midMorningSnack = document.getElementById('midMorningSnack').value;
+            const lunch = document.getElementById('lunch').value;
+            const afternoonSnack = document.getElementById('afternoonSnack').value;
+            const dinner = document.getElementById('dinner').value;
+
+            const mealPlanDisplay = document.getElementById('mealPlanDisplay');
+            const mealHtml = `
+                <div class="meal">
+                    <h2>${day}</h2>
+                    <h3>Breakfast</h3>
+                    <ul>
+                        ${breakfast.split('\n').map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                    <h3>Mid-Morning Snack</h3>
+                    <ul>
+                        ${midMorningSnack.split('\n').map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                    <h3>Lunch</h3>
+                    <ul>
+                        ${lunch.split('\n').map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                    <h3>Afternoon Snack</h3>
+                    <ul>
+                        ${afternoonSnack.split('\n').map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                    <h3>Dinner</h3>
+                    <ul>
+                        ${dinner.split('\n').map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+
+            mealPlanDisplay.innerHTML += mealHtml;
+
+            // Clear the form
+            document.getElementById('mealForm').reset();
+        }
+    </script>
+</body>
+
+</html>
